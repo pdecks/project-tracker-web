@@ -14,7 +14,11 @@ def get_student():
     # get project/title info
     rows = hackbright.get_grades_by_github(github)
     # print "This is rows: %s" % rows
-    html = render_template("student_info.html", first=first, last=last, github=github, rows=rows) #update to pass list
+    html = render_template("student_info.html",
+                           first=first,
+                           last=last,
+                           github=github,
+                           rows=rows) #update to pass list
 
     return html
 
@@ -35,7 +39,11 @@ def student_add():
     # print "This is firstname: %s" % fname
     # print "This is lastname: %s" % lname
     hackbright.make_new_student(first, last, github)
-    html = render_template("student-added.html", first=first, last=last, github=github)
+
+    html = render_template("student-added.html",
+                           first=first,
+                           last=last,
+                           github=github)
 
     return html
 
@@ -45,11 +53,16 @@ def get_student_add_form():
 
     return render_template("student-add.html")
 
-@app.route("/project/<title>")
-def display_project(title):
+@app.route("/project/<proj_title>")
+def display_project(proj_title):
     """Show info for the project clicked on"""
-    title, description, max_grade= hackbright.get_project_by_title(title)
-    return render_template("project.html", title=title, description=description, max_grade=max_grade)
+    title, description, max_grade= hackbright.get_project_by_title(proj_title)
+    rows= hackbright.get_names_and_grades_by_title(title) # replace with new function that return student name and grade
+    return render_template("project.html",
+                           title=title,
+                           description=description,
+                           max_grade=max_grade,
+                           rows=rows)
 
 if __name__ == "__main__":
     hackbright.connect_to_db(app)

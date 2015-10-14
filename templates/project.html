@@ -7,9 +7,11 @@
 <h1>{{ title }} </h1>
 <p>Description: {{ description }}</p>
 <p>Max Grade: {{ max_grade }}</p>
-    <!-- add list of project title and grades in jinja for loop -->
-    <!-- consider adding response when github doesn't exist -->
-   
-    
+    <!-- jinja for loop -->
+    <ul>
+    {% for row in rows %}
+    <li>Student name: {{row[0]}} {{row[1]}}, grade: {{row[2]}}</li>
+    {% endfor %}
+    </ul>
 </body>
 </html>
