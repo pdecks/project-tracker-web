@@ -87,6 +87,18 @@ def assign_grade(github, title, grade):
     print "Successfully assigned grade of %s for %s in %s" % (
         grade, github, title)
 
+def get_github_by_student(first_name, last_name):
+    """Returns the github associated with a student"""
+
+    QUERY = """
+        SELECT github 
+        FROM Students 
+        WHERE first_name = :first_name AND last_name = :last_name
+        """
+    db_cursor = db.session.execute(QUERY, {'first_name': first_name, 'last_name': last_name})
+    row = db_cursor.fetchone()
+    return row
+
 def get_grades_by_github(github):
     """Get a list of all grades for a student by their github username"""
     QUERY = """
@@ -128,6 +140,25 @@ def get_names_and_grades_by_title(title):
     rows = db_cursor.fetchall()
     return rows
 
+def get_students():
+    """Return a list of all students in the database"""
+    QUERY = """
+        SELECT DISTINCT first_name, last_name
+        FROM Students
+        """
+    db_cursor = db.session.execute(QUERY)
+    rows = db_cursor.fetchall()
+    return rows
+
+def get_projects():
+    """Return a list of all projects in the database"""
+    QUERY = """
+        SELECT DISTINCT title
+        FROM Projects
+        """
+    db_cursor = db.session.execute(QUERY)
+    rows = db_cursor.fetchall()
+    return rows
 
 def handle_input():
     """Main loop.
