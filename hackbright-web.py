@@ -26,10 +26,13 @@ def get_student_form():
 def student_add():
     """Add a student."""
     github = request.form.get('github')
-    fname = request.form.get('firstname')
-    lname = request.form.get('lastname')
-    fname, lname, github = hackbright.make_new_student(fname, lname, github)
-    html = render_template("student-added.html", fname=fname, lname=lname, github=github)
+    first = request.form.get('firstname')
+    last = request.form.get('lastname')
+    # print "This is github: %s" % github
+    # print "This is firstname: %s" % fname
+    # print "This is lastname: %s" % lname
+    hackbright.make_new_student(first, last, github)
+    html = render_template("student-added.html", first=first, last=last, github=github)
 
     return html
 
