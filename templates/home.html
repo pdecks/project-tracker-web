@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+<h1>Welcome!</h1>
+
+<div id="students">
+    <h2>Students</h2>
+        <ul>
+        {%for row in student_rows%} <!-- loop over students -->
+           <!-- <li>{{row[0]}} {{row[1]}}</li> -->
+           {% with %}
+
+           <li><a href="/student_info/{{row[0]}}{{row[1]}}">{{row[0]}} {{row[1]}}</a></li>
+           {% endwith %}
+        {% endfor %}
+        </ul>
+</div>
+
+<div id="projects">
+    <h2>Projects</h2>
+        <ul>
+        {%for row in project_rows%} <!-- loop over projects -->
+           <!-- <li>{{row[0]}}</li> -->
+           <li><a href="/project/{{row[0]}}">{{row[0]}}</a></li>
+        {% endfor %}
+        </ul>
+</div>
+
+</body>
+</html>
